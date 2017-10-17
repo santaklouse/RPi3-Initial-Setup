@@ -19,13 +19,13 @@ echo "gpu_mem=16" >> /Volumes/boot/config.txt
 diskutil umount /Volumes/boot
 ```
 
-### OS SETUP ####
-
+#### OS INITIAL SETUP
+```
 sudo bash
-
-# DISABLE IPv&
-#     https://www.raspberrypi.org/forums/viewtopic.php?t=138899
-
+```
+##### DISABLE IPv&
+https://www.raspberrypi.org/forums/viewtopic.php?t=138899
+```
 cat <<EOF > /etc/modprobe.d/ipv6.conf
 alias net-pf-10 off
 alias ipv6 off
@@ -40,11 +40,12 @@ net.ipv6.conf.lo.disable_ipv6 = 1
 net.ipv6.conf.eth0.disable_ipv6 = 1
 net.ipv6.conf.[interface].disable_ipv6 = 1
 EOF
+```
+##### NETWORK CONFIGURATION
+wlan0 = Internal WiFi Adaptor
 
-# NETWORK CONFIGURATION
-#     wlan0 = Internal WiFi Adaptor
-#     wlan1 = USB WiFi Dongle (Using TP-Link TL-WN725N)
-
+wlan1 = USB WiFi Dongle (Using TP-Link TL-WN725N)
+```
 cat <<EOF > /etc/network/interfaces 
 source-directory /etc/network/interfaces.d
 auto lo
@@ -67,7 +68,7 @@ network={
     psk="PASSWORD"              # < Change as you need
 }
 EOF
-
+```
 # ENABLE REQUIRED SERVICE
 systemctl enable ssh
 systemctl enable avahi-daemon
