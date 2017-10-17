@@ -107,6 +107,15 @@ chmod 755 /etc/cron.hourly/ntpdate
 ```
 rpi-update
 ```
+#### FSTAB
+```
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+rm -rf /var/log/*
+echo 'tmpfs  /tmp           tmpfs defaults,size=32m,noatime,mode=1777 0 0' >> /etc/fstab
+echo 'tmpfs  /var/tmp       tmpfs defaults,size=16m,noatime,mode=1777 0 0' >> /etc/fstab
+echo 'tmpfs  /var/log       tmpfs defaults,size=16m,noatime,mode=0755 0 0' >> /etc/fstab
+```
 #### HOSTNAME CONFIGURATION
 ```
 echo "broccoli" > /etc/hostname
