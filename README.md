@@ -1,29 +1,30 @@
-### RPi-Initial-Setup
-##### Unmount SD Card and Write Raspbian Image
+## RPi-Initial-Setup
+### Image writing (Mac)
+#### Unmount SD Card and Write Raspbian Image
 ```
 diskutil umount /dev/disk2s1
 sudo dd if=~/Downloads/2017-07-05-raspbian-jessie-lite.img of=/dev/disk2 bs=1m
 ```
-##### ENABLE UART
+#### ENABLE UART
 https://www.raspberrypi.org/documentation/configuration/uart.md
 ```
 echo "enable_uart=1" > /Volumes/boot/config.txt
 ```
-##### GPU MEMORY ALLOCATION
+#### GPU MEMORY ALLOCATION
 https://www.raspberrypi.org/documentation/configuration/config-txt/memory.md
 ```
 echo "gpu_mem=16" >> /Volumes/boot/config.txt
 ```
-##### Unmount SD Card and Remove it
+#### Unmount SD Card and Remove it
 ```
 diskutil umount /Volumes/boot
 ```
 
-#### OS INITIAL SETUP
+### OS INITIAL SETUP
 ```
 sudo bash
 ```
-##### DISABLE IPv&
+#### DISABLE IPv&
 https://www.raspberrypi.org/forums/viewtopic.php?t=138899
 ```
 cat <<EOF > /etc/modprobe.d/ipv6.conf
@@ -41,7 +42,7 @@ net.ipv6.conf.eth0.disable_ipv6 = 1
 net.ipv6.conf.[interface].disable_ipv6 = 1
 EOF
 ```
-##### NETWORK CONFIGURATION
+#### NETWORK CONFIGURATION
 wlan0 = Internal WiFi Adaptor
 
 wlan1 = USB WiFi Dongle (Using TP-Link TL-WN725N)
@@ -69,15 +70,16 @@ network={
 }
 EOF
 ```
-# ENABLE REQUIRED SERVICE
+#### ENABLE REQUIRED SERVICE
+```
 systemctl enable ssh
 systemctl enable avahi-daemon
-
 reboot
+```
 
+#### REMOVE UNNECESSARY PACKAGES AND UPDATE OS
+```
 ssh pi@raspberrypi.local
-
-# REMOVE UNNECESSARY PACKAGES AND UPDATE OS
 sudo bash
 
 echo 'deb http://ftp.jaist.ac.jp/raspbian/ jessie main contrib non-free rpi' > /etc/apt/sources.list
@@ -85,12 +87,14 @@ apt-get update
 apt-get autoremove --purge -y alsa-utils bluez cifs-utils dosfstools dphys-swapfile ed fbset kbd keyboard-configuration nano nfs-common ntp rsyslog vim-tiny v4l-utils xauth xdg-user-dirs xkb-data
 apt-get autoremove --purge -y
 apt-get -y upgrade
-
-# INSTALL REQUIRED PACKAGES
+```
+#### INSTALL REQUIRED PACKAGES
+```
 apt-get install -y vim ntpdate git
 apt-get clean
-
-# TIME CONFIGURATION
+```
+#### TIME CONFIGURATION
+```
 ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ntpdate ntp.nict.jp
 cat <<EOF > /etc/cron.hourly/ntpdate
@@ -98,13 +102,18 @@ cat <<EOF > /etc/cron.hourly/ntpdate
 ntpdate ntp.nict.jp >/dev/null 2>&1
 EOF
 chmod 755 /etc/cron.hourly/ntpdate
-
-# UPDATE FIRMWARE
+```
+#### UPDATE FIRMWARE
+```
 rpi-update
-
-# HOSTNAME CONFIGURATION
+```
+#### HOSTNAME CONFIGURATION
+```
 echo "broccoli" > /etc/hostname
 echo "127.0.0.1       localhost" > /etc/hosts
 echo "127.0.1.1       broccoli" >> /etc/hosts
-
+```
+#### Done
+```
 reboot
+```
