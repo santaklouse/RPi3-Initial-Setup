@@ -13,6 +13,8 @@ echo "enable_uart=1" > /Volumes/boot/config.txt
 https://www.raspberrypi.org/documentation/configuration/config-txt/memory.md
 ```
 echo "gpu_mem=16" >> /Volumes/boot/config.txt
+```
+##### Unmount SD Card and Remove it
 diskutil umount /Volumes/boot
 ```
 
