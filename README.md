@@ -1,5 +1,5 @@
 ## RPi-Initial-Setup
-### Image writing (Mac)
+### Image writing (Mac　w/ Terminal.app)
 #### Unmount SD Card and Write Raspbian Image
 ```
 diskutil umount /dev/disk2s1
