@@ -24,7 +24,7 @@ diskutil umount /Volumes/boot
 ```
 sudo bash
 ```
-#### DISABLE IPv&
+#### DISABLE IPv6
 https://www.raspberrypi.org/forums/viewtopic.php?t=138899
 ```
 cat <<EOF > /etc/modprobe.d/ipv6.conf
