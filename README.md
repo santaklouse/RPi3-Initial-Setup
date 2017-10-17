@@ -1,5 +1,5 @@
 ### RPi-Initial-Setup
-
+##### Unmount SD Card and Write Raspbian Image
 ```
 diskutil umount /dev/disk2s1
 sudo dd if=~/Downloads/2017-07-05-raspbian-jessie-lite.img of=/dev/disk2 bs=1m
@@ -15,6 +15,7 @@ https://www.raspberrypi.org/documentation/configuration/config-txt/memory.md
 echo "gpu_mem=16" >> /Volumes/boot/config.txt
 ```
 ##### Unmount SD Card and Remove it
+```
 diskutil umount /Volumes/boot
 ```
 
