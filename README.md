@@ -7,11 +7,11 @@ sudo dd if=~/Downloads/2017-07-05-raspbian-jessie-lite.img of=/dev/disk2 bs=1m
 #### ENABLE UART
 
 https://www.raspberrypi.org/documentation/configuration/uart.md
-
+```
 echo "enable_uart=1" > /Volumes/boot/config.txt
-
-# GPU MEMORY ALLOCATION
-#     https://www.raspberrypi.org/documentation/configuration/config-txt/memory.md
+```
+#### GPU MEMORY ALLOCATION
+ https://www.raspberrypi.org/documentation/configuration/config-txt/memory.md
 
 echo "gpu_mem=16" >> /Volumes/boot/config.txt
 
